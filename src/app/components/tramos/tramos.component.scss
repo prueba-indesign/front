@@ -1,0 +1,15 @@
+.overlay {
+  position: absolute;
+  width: 100%;
+  height: calc(100% - 56px);
+  justify-content: center;
+  align-items: center;
+  z-index: 99;
+  background: #000000ad;
+  color: white;
+}
+
+.inner-table {
+  max-height: 400px;
+  overflow-y: auto;
+}

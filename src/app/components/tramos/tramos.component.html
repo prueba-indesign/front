@@ -1,0 +1,125 @@
+<div *ngIf="loading" class="d-flex align-items-center overlay">
+  <strong class="px-3">Generando consulta...</strong>
+  <div class="spinner-border ml-auto" role="status" aria-hidden="true"></div>
+</div>
+<div class="p-4">
+  <div class="container">
+    <div class="row p-2">
+      <div class="col-12">
+        <div class="card w-100">
+          <div class="card-body">
+            <h5 class="card-title">
+              Selecciona las fechas en las que deseas filtrar el historico de
+              tramos
+            </h5>
+            <form [formGroup]="dateForm" (ngSubmit)="onSubmit()">
+              <label for="startDate">Fecha de inicio:</label>
+              <input
+                type="date"
+                class="my-2 w-100"
+                id="initDate"
+                formControlName="startDate"
+                placeholder="yyyy-MM-dd"
+                min="2000-01-01"
+                max="2023-07-01"
+                required
+              />
+              <label for="endDate">Fecha final:</label>
+              <input
+                type="date"
+                class="my-2 w-100"
+                id="endDate"
+                formControlName="endDate"
+                placeholder="yyyy-MM-dd"
+                min="2000-01-01"
+                max="2023-07-01"
+                required
+              />
+            </form>
+            <button
+              [disabled]="!dateForm.valid && dateForm.pristine"
+              type="submit"
+              (click)="onSubmit()"
+              class="btn btn-primary my-2"
+            >
+              Buscar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row px-3 mt-2">
+      <div *ngIf="consumos.length > 0" class="card inner-table col-12 my-2">
+        <h5 class="my-2">Histórico Consumos por Tramos</h5>
+        <table class="table table-hover table-responsive">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">No</th>
+              <th scope="col">Línea</th>
+              <th scope="col">Cliente</th>
+              <th scope="col">Fecha</th>
+              <th scope="col">Dato</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let consumo of consumos; let i = index">
+              <td scope="row">{{ i + 1 }}</td>
+              <td>{{ consumo["linea"] }}</td>
+              <td>{{ consumo["cliente"] }}</td>
+              <td>{{ consumo["fecha"] }}</td>
+              <td>{{ consumo["dato"] }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div *ngIf="costos.length > 0" class="card inner-table col-12 my-2">
+        <h5 class="my-2">Histórico Costos por Tramos</h5>
+        <table class="table table-hover table-responsive">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">No</th>
+              <th scope="col">Línea</th>
+              <th scope="col">Cliente</th>
+              <th scope="col">Fecha</th>
+              <th scope="col">Dato</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let costo of costos; let i = index">
+              <td scope="row">{{ i + 1 }}</td>
+              <td>{{ costo["linea"] }}</td>
+              <td>{{ costo["cliente"] }}</td>
+              <td>{{ costo["fecha"] }}</td>
+              <td>{{ costo["dato"] }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div *ngIf="perdidas.length > 0" class="card inner-table col-12 my-2">
+        <h5 class="my-2">Histórico Perdidas por Tramos</h5>
+        <table class="table table-hover table-responsive">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">No</th>
+              <th scope="col">Línea</th>
+              <th scope="col">Cliente</th>
+              <th scope="col">Fecha</th>
+              <th scope="col">Dato</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let perdida of perdidas; let i = index">
+              <td scope="row">{{ i + 1 }}</td>
+              <td>{{ perdida["linea"] }}</td>
+              <td>{{ perdida["cliente"] }}</td>
+              <td>{{ perdida["fecha"] }}</td>
+              <td>{{ perdida["dato"] }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
